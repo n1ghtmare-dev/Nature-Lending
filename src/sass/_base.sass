@@ -1,0 +1,65 @@
+$color-blue-dark: #0B1919
+$color-blue-light: #1D2F30
+$color-green: #BAE249
+$color-gray: #899D9D
+$color-white: #FFFFFF
+
+
+*, ::after, ::before
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+
+@mixin respond($breakpoint)
+  @if $breakpoint == phone
+    @media only screen and (max-width: 440px)
+        @content
+  @if $breakpoint == tab-port
+      @media only screen and (max-width: 960px)
+          @content
+  @if $breakpoint == tab-land
+      @media only screen and (max-width: 1230px)
+          @content
+  @if $breakpoint == big-screen
+      @media only screen and (max-width: 1800px)
+          @content
+
+html
+  font-size: 62.5%
+  @include respond(tab-port)
+    font-size: 50%
+
+body 
+  font-family: "Open Sans", sans-serif
+  font-size: 1.6rem
+
+.container
+  display: grid
+  grid-template-columns: [full-start] minmax(16.5rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 1fr) [col-end]) [center-end] minmax(16.5rem, 1fr) [full-end]
+  grid-template-rows: 6rem minmax(min-content, 49rem) repeat(3, min-content) 6rem 2.5rem
+  @include respond(tab-port)
+    grid-template-rows: 0rem minmax(min-content, 49rem) repeat(3, min-content) 6rem 2.5rem
+    grid-template-columns: [full-start] minmax(4rem, 1fr) [center-start] repeat(12, [col-start] minmax(min-content, 1fr) [col-end]) [center-end] minmax(4rem, 1fr) [full-end]
+
+.footer
+  grid-column: full-start / full-end
+  background-color: $color-blue-dark
+  display: flex
+  justify-content: center
+  align-items: center
+  .urls
+    display: flex
+    align-items: center
+    img
+      &:not(:last-child)
+        margin-right: 3rem
+.footer-info 
+  grid-column: full-start / full-end 
+  background-color: $color-blue-light
+  text-align: center
+  padding: 0.3rem
+  span 
+    color: $color-gray
+    text-align: center
+
+
